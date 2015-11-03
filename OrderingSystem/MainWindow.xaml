@@ -1,0 +1,67 @@
+﻿<Window x:Class="OrderingSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OrderingSystem"
+        mc:Ignorable="d"
+        Title="PennyPet" Height="450" Width="650">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="620" Height="140" Background="AliceBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="1" Grid.Column="0" Content="买家" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxBuyer" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="2" Content="商品" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxGood" Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="4" Content="单价" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxPrice" Grid.Row="1" Grid.Column="5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="6" Content="数量" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxQuantity" Grid.Row="1" Grid.Column="7" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="商品" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelGood" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Background="LightBlue"/>
+            <Label Grid.Row="3" Grid.Column="2" Content="尺寸" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxGoodSize" Grid.Row="3" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="3" Grid.Column="4" Content="颜色" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxGoodColor" Grid.Row="3" Grid.Column="5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="8" Content="ID:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Label x:Name="labelID" Grid.Row="1" Grid.Column="9" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Background="LightYellow"/>
+            <Label Grid.Row="3" Grid.Column="6" Content="备注" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxRemark" Grid.Row="3" Grid.Column="7" Grid.ColumnSpan="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="地址" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxAddress" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="7" TextWrapping="Wrap" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Button x:Name="buttonAdd" Grid.Row="5" Grid.Column="9" Content="添加" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Grid>
+        <Label x:Name="labelNewOrder" Content="新订单" HorizontalAlignment="Left" Margin="15,5,0,0" VerticalAlignment="Top" Background="AliceBlue"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="10,200,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="200" Width="600" ItemsSource="{Binding BindsDirectlyToSource=True}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="买家" Width="*" Binding="{Binding Buyer}"/>
+                <DataGridTextColumn Header="商品" Width="*" Binding="{Binding Good}"/>
+                <DataGridTextColumn Header="单价" Width="*" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="数量" Width="*" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="颜色" Width="*" Binding="{Binding GoodColor}"/>
+                <DataGridTextColumn Header="尺寸" Width="*" Binding="{Binding GoodSize}"/>
+                <DataGridTextColumn Header="付款状态" Width="*" Binding="{Binding PaymentStatus}"/>
+                <DataGridTextColumn Header="备注" Width="*" Binding="{Binding Remark}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
