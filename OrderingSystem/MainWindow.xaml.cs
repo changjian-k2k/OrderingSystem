@@ -21,38 +21,64 @@ namespace OrderingSystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableCollection<Ordering> orderData = new ObservableCollection<Ordering>();
+        public OrderForm orderForm = new OrderForm();
+        ObservableCollection<OrderForm> orderData = new ObservableCollection<OrderForm>();
         public MainWindow()
         {
             InitializeComponent();
-            this.Loaded += MainWindow_Loaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             buttonAdd.Click += ButtonAdd_Click;
+            buttonDefault.Click += ButtonDefault_Click;
+            buttonChange.Click += ButtonChange_Click;
             dataGrid.DataContext = orderData;
+            gridNewOrder.DataContext = orderForm;
+
+            List<OrderForm> _orderList = OrderingSystemDB.GetOrder();
+            foreach (var item in _orderList)
+            {
+                orderData.Add(item);
+            }
+        }
+
+        private void ButtonChange_Click(object sender, RoutedEventArgs e)
+        {
+            orderForm.Buyer = "Penny";
+        }
+
+        private void ButtonDefault_Click(object sender, RoutedEventArgs e)
+        {
+            NewOrderBinding();
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            orderData.Add(new Ordering()
-            {
-                Buyer = this.textBoxBuyer.Text,
-                Good = this.textBoxGood.Text,
-                Price = Convert.ToDouble(this.textBoxPrice.Text),
-                Quantity = Convert.ToInt16(this.textBoxQuantity.Text),
-                Remark = this.textBoxRemark.Text
-            });
+            orderData.Add(orderForm);
+            OrderingSystemDB.AddOrder(orderForm);
         }
-    }
 
-    public class Ordering
-    {
-        public string Buyer { get; set; }
-        public string Good { get; set; }
-        public double Price { get; set; }
-        public int Quantity { get; set; }
-        public string Remark { get; set; }
+        private void NewOrderBinding()
+        {
+            orderForm.Id = 0;
+            orderForm.Buyer = null;
+            orderForm.Good = null;
+            orderForm.Price = null;
+            orderForm.Quantity = null;
+            orderForm.GoodColor = null;
+            orderForm.GoodSize = null;
+            orderForm.Remark = null;
+            orderForm.Address = null;
+            orderForm.OrderDate = DateTime.Now;
+            orderForm.ShipDate = DateTime.Now;
+            orderForm.Photo = null;
+            orderForm.PaymentStatus = null;
+        }
+
+        private void buttonTestAdd_Click(object sender, RoutedEventArgs e)
+        {
+            TestTableDB.AddItem(textBoxName.Text);
+        }
     }
 }
