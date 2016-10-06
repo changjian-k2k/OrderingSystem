@@ -23,6 +23,10 @@ namespace OrderingSystem
     {
         public OrderForm orderForm = new OrderForm();
         ObservableCollection<OrderForm> orderData = new ObservableCollection<OrderForm>();
+        ObservableCollection<OrderingSystemForm> osData = new ObservableCollection<OrderingSystemForm>();
+        ObservableCollection<ClientForm> clientData = new ObservableCollection<ClientForm>();
+        ObservableCollection<GoodForm> goodData = new ObservableCollection<GoodForm>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,6 +44,24 @@ namespace OrderingSystem
             foreach (var item in _orderList)
             {
                 orderData.Add(item);
+            }
+
+            List<OrderingSystemForm> _osList = OrderingSystemDB.GetOrderingSystem();
+            foreach (var item in _osList)
+            {
+                osData.Add(item);
+            }
+
+            List<ClientForm> _clientList = OrderingSystemDB.GetClient();
+            foreach (var item in _clientList)
+            {
+                clientData.Add(item);
+            }
+
+            List<GoodForm> _goodList = OrderingSystemDB.GetGood();
+            foreach (var item in _goodList)
+            {
+                goodData.Add(item);
             }
         }
 

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OrderingSystem"
         mc:Ignorable="d"
-        Title="PennyPet" Height="600" Width="810" Loaded="MainWindow_Loaded">
+        Title="PennyPet" Height="600" Width="960" Loaded="MainWindow_Loaded">
     <Grid>
-        <Grid x:Name="gridNewOrder" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="780" Height="140" Background="AliceBlue">
+        <Grid x:Name="gridNewOrder" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="930" Height="150" Background="AliceBlue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="35"/>
@@ -17,58 +17,66 @@
                 <RowDefinition Height="45"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="60"/>
                 <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="60"/>
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="60"/>
                 <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="1" Grid.Column="0" Content="买家" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxBuyer" Text="{Binding Path=Buyer, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="cbBoxBuyer"
+                      ItemsSource="{Binding clientData, Mode=OneWay}" 
+                      SelectedValuePath="Id" 
+                      DisplayMemberPath="Name"
+                      SelectedValue="{Binding ClientForm}" 
+                      Grid.Row="1" Grid.Column="1" IsEditable="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
-            <Label Grid.Row="1" Grid.Column="2" Content="商品" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxGood" Text="{Binding Path=Good, Mode=TwoWay}" Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="2" Content="地址" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxAddress" Text="{Binding Path=Address, Mode=OneWay}" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
-            <Label Grid.Row="1" Grid.Column="4" Content="单价" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxPrice" Text="{Binding Path=Price, Mode=TwoWay}" Grid.Row="1" Grid.Column="5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="8" Content="联系方式" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxPhone" Text="{Binding Path=Buyer, Mode=OneWay}" Grid.Row="1" Grid.Column="9" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
-            <Label Grid.Row="1" Grid.Column="6" Content="数量" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxQuantity" Text="{Binding Path=Quantity, Mode=TwoWay}" Grid.Row="1" Grid.Column="7" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-
-            <Label Grid.Row="1" Grid.Column="8" Content="付款状态" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textPaymentStatus" Text="{Binding Path=PaymentStatus, Mode=TwoWay}" Grid.Row="1" Grid.Column="9" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="10" Content="收件人" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxAddressee" Text="{Binding Path=Buyer, Mode=OneWay}" Grid.Row="1" Grid.Column="11" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
             <Label Grid.Row="3" Grid.Column="0" Content="商品" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxShowGood" Text="{Binding Path=Good, Mode=TwoWay}" IsReadOnly="True" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Background="LightBlue"/>
+            <ComboBox x:Name="cbBoxGood" Text="{Binding Path=Good, Mode=TwoWay}" Grid.Row="3" Grid.Column="1" IsEditable="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
-            <Label Grid.Row="3" Grid.Column="2" Content="尺寸" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxGoodSize" Text="{Binding Path=GoodSize, Mode=TwoWay}" Grid.Row="3" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="3" Grid.Column="2" Content="单价" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxPrice" Text="{Binding Path=Price, Mode=TwoWay}" Grid.Row="3" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
-            <Label Grid.Row="3" Grid.Column="4" Content="颜色" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxGoodColor" Text="{Binding Path=GoodColor, Mode=TwoWay}" Grid.Row="3" Grid.Column="5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="3" Grid.Column="4" Content="数量" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxQuantity" Text="{Binding Path=Quantity, Mode=TwoWay}" Grid.Row="3" Grid.Column="5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
-            <Label Grid.Row="1" Grid.Column="10" Content="ID:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxID" Text="{Binding Path=Id, Mode=TwoWay}" IsReadOnly="True" Grid.Row="1" Grid.Column="11" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Background="LightYellow"/>
+            <Label Grid.Row="3" Grid.Column="6" Content="尺寸" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="cbBoxGoodSize" Text="{Binding Path=GoodSize, Mode=TwoWay}" Grid.Row="3" Grid.Column="7" IsEditable="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
-            <Label Grid.Row="3" Grid.Column="8" Content="订单日期" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <DatePicker x:Name="textOrderDate" Text="{Binding Path=OrderDate, Mode=TwoWay}" Grid.Row="3" Grid.Column="9" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="3" Grid.Column="8" Content="颜色" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="cbBoxGoodColor" Text="{Binding Path=GoodColor, Mode=TwoWay}" Grid.Row="3" Grid.Column="9" IsEditable="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
-            <Label Grid.Row="5" Grid.Column="8" Content="发货日期" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <DatePicker x:Name="textShipDate" Text="{Binding Path=ShipDate, Mode=TwoWay}" Grid.Row="5" Grid.Column="9" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="3" Grid.Column="10" Content="ID:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxID" Text="{Binding Path=Id, Mode=TwoWay}" IsReadOnly="True" Grid.Row="3" Grid.Column="11" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Background="LightYellow"/>
 
-            <Label Grid.Row="3" Grid.Column="6" Content="备注" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxRemark" Text="{Binding Path=Remark, Mode=TwoWay}" Grid.Row="3" Grid.Column="7" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="订单日期" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <DatePicker x:Name="textOrderDate" Text="{Binding Path=OrderDate, Mode=TwoWay}" Grid.Row="5" Grid.Column="1" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
-            <Label Grid.Row="5" Grid.Column="0" Content="地址" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="textBoxAddress" Text="{Binding Path=Address, Mode=TwoWay}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="7" TextWrapping="Wrap" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="5" Grid.Column="2" Content="发货日期" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <DatePicker x:Name="textShipDate" Text="{Binding Path=ShipDate, Mode=TwoWay}" Grid.Row="5" Grid.Column="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+
+            <Label Grid.Row="5" Grid.Column="4" Content="付款状态" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="textPaymentStatus" Text="{Binding Path=PaymentStatus, Mode=TwoWay}" Grid.Row="5" Grid.Column="5" IsEditable="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+
+            <Label Grid.Row="5" Grid.Column="6" Content="备注" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="textBoxRemark" Text="{Binding Path=Remark, Mode=TwoWay}" Grid.Row="5" Grid.Column="7" Grid.ColumnSpan="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
 
             <Button x:Name="buttonAdd" Grid.Row="5" Grid.Column="11" Content="添加" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
@@ -93,7 +101,8 @@
         <DatePicker HorizontalAlignment="Left" Margin="147,518,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" Margin="285,518,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="buttonTestAdd" Content="TestDB" HorizontalAlignment="Left" Margin="410,517,0,0" VerticalAlignment="Top" Width="75" Click="buttonTestAdd_Click"/>
-        <Button x:Name="buttonAddNewCustomer" Content="添加新客户" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="buttonAddNewGood" Content="添加新产品" HorizontalAlignment="Left" Margin="119,175,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="buttonAddNewCustomer" Content="添加新客户" HorizontalAlignment="Left" Margin="10,187,0,0" VerticalAlignment="Top" Width="80" Height="30"/>
+        <Button x:Name="buttonAddNewGood" Content="添加新产品" HorizontalAlignment="Left" Margin="100,187,0,0" VerticalAlignment="Top" Width="80" Height="30"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="61,490,0,0" VerticalAlignment="Top" Width="120" IsEditable="True"/>
     </Grid>
 </Window>

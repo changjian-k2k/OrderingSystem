@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OrderingSystem
 {
-    public class OrderForm : INotifyPropertyChanged
+    public class OrderingSystemForm : INotifyPropertyChanged
     {
         int _id;
         public int Id
@@ -26,36 +26,37 @@ namespace OrderingSystem
             }
         }
 
-        string _buyer;
-        public string Buyer {
-            get
-            {
-                return this._buyer;
-            }
-            set
-            {
-                if (this._buyer != value)
-                {
-                    _buyer = value;
-                    OnPropertyChanged(nameof(Buyer));
-                }
-                
-            }
-        }
-
-        string _good;
-        public string Good
+        int _clientID;
+        public int ClientID
         {
             get
             {
-                return this._good;
+                return this._clientID;
             }
             set
             {
-                if (this._good != value)
+                if (this._clientID != value)
                 {
-                    _good = value;
-                    OnPropertyChanged(nameof(Good));
+                    _clientID = value;
+                    OnPropertyChanged(nameof(ClientID));
+                }
+
+            }
+        }
+
+        int _goodID;
+        public int GoodID
+        {
+            get
+            {
+                return this._goodID;
+            }
+            set
+            {
+                if (this._goodID != value)
+                {
+                    _goodID = value;
+                    OnPropertyChanged(nameof(GoodID));
                 }
 
             }
@@ -92,42 +93,6 @@ namespace OrderingSystem
                 {
                     _quantity = value;
                     OnPropertyChanged(nameof(Quantity));
-                }
-
-            }
-        }
-
-        string _goodColor;
-        public string GoodColor
-        {
-            get
-            {
-                return this._goodColor;
-            }
-            set
-            {
-                if (this._goodColor != value)
-                {
-                    _goodColor = value;
-                    OnPropertyChanged(nameof(GoodColor));
-                }
-
-            }
-        }
-
-        string _goodSize;
-        public string GoodSize
-        {
-            get
-            {
-                return this._goodSize;
-            }
-            set
-            {
-                if (this._goodSize != value)
-                {
-                    _goodSize = value;
-                    OnPropertyChanged(nameof(GoodSize));
                 }
 
             }
@@ -241,21 +206,57 @@ namespace OrderingSystem
             }
         }
 
-        public OrderForm()
+        decimal? _discount;
+        public decimal? Discount
+        {
+            get
+            {
+                return this._discount;
+            }
+            set
+            {
+                if (this._discount != value)
+                {
+                    _discount = value;
+                    OnPropertyChanged(nameof(Discount));
+                }
+
+            }
+        }
+
+        decimal? _amount;
+        public decimal? Amount
+        {
+            get
+            {
+                return this._amount;
+            }
+            set
+            {
+                if (this._amount != value)
+                {
+                    _amount = value;
+                    OnPropertyChanged(nameof(Amount));
+                }
+
+            }
+        }
+
+        public OrderingSystemForm()
         {
             Id = 0;
-            Buyer = null;
-            Good = null;
+            ClientID = 0;
+            GoodID = 0;
             Price = null;
             Quantity = null;
-            GoodColor = null;
-            GoodSize = null;
             Remark = null;
             Address = null;
             OrderDate = DateTime.Today;
             ShipDate = DateTime.Today;
             Photo = null;
             PaymentStatus = null;
+            Discount = null;
+            Amount = null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

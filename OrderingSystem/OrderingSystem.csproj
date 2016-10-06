@@ -73,6 +73,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientDB.cs" />
+    <Compile Include="ClientForm.cs" />
+    <Compile Include="GoodDB.cs" />
+    <Compile Include="GoodForm.cs" />
+    <Compile Include="OrderDB.cs" />
+    <Compile Include="OrderingSystemForm.cs" />
     <Compile Include="TestTable.cs" />
     <Compile Include="TestTableDB.cs" />
     <Page Include="MainWindow.xaml">
@@ -91,19 +97,6 @@
   <ItemGroup>
     <Compile Include="OrderForm.cs" />
     <Compile Include="OrderingSystemDB.cs" />
-    <Compile Include="PennyPetOrderingDataSet.cs">
-      <DependentUpon>PennyPetOrderingDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="PennyPetOrderingDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PennyPetOrderingDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="PennyPetOrderingDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PennyPetOrderingDataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -121,27 +114,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="PennyPetOrderingDataSet.xsc">
-      <DependentUpon>PennyPetOrderingDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="PennyPetOrderingDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PennyPetOrderingDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="PennyPetOrderingDataSet.xss">
-      <DependentUpon>PennyPetOrderingDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="PennyPetOrderingDataSet1.xsc">
-      <DependentUpon>PennyPetOrderingDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="PennyPetOrderingDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PennyPetOrderingDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="PennyPetOrderingDataSet1.xss">
-      <DependentUpon>PennyPetOrderingDataSet1.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

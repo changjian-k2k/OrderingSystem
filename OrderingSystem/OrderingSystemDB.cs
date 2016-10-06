@@ -7,70 +7,47 @@ using System.Data.SqlClient;
 
 namespace OrderingSystem
 {
-    public static class OrderingSystemDB
+    public static partial class OrderingSystemDB
     {
-        public static SqlConnection GetConnection()
-        {
-            string conStr = Properties.Settings.Default.PennyPetOrderingConnectionString;
-            //string conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C: \Users\cj\Documents\Visual Studio 2015\Projects\OrderingSystem\OrderingSystem\PennyPetOrdering.mdf;Integrated Security=True";
-            SqlConnection conn = new SqlConnection(conStr);
-            return conn;
-        }
-
-        public static void AddOrder(OrderForm order)
+        public static void AddOrderingSystem(OrderingSystemForm os)
         {
             //string insStmt = "INSERT INTO OrderItem (Id, Buyer, Good, Price,Quantity,GoodColor,GoodSize,Remark,Address,OrderDate,ShipDate,Photo,PaymentStatus) VALUES (@id,@buyer,@good,@price,@quantity,@goodColor,@goodSize,@remark,@address,@orderDate,@shipDate,@photo,@paymentStatus)";
             //SqlConnection conn = GetConnection();
             //SqlCommand insCmd = new SqlCommand(insStmt, conn);
             //insCmd.Parameters.AddWithValue("@id", order.Id);
-            string insStmt = "INSERT INTO OrderItem (Buyer, Good, Price,Quantity,GoodColor,GoodSize,Remark,Address,OrderDate,ShipDate,Photo,PaymentStatus) VALUES (@buyer,@good,@price,@quantity,@goodColor,@goodSize,@remark,@address,@orderDate,@shipDate,@photo,@paymentStatus)";
+            string insStmt = "INSERT INTO OrderItem (ClientID,GoodID,Price,Quantity,Remark,OrderDate,ShipDate,Photo,PaymentStatus,Discount,Amount) VALUES (@clientID,@goodID,@price,@quantity,@remark,@orderDate,@shipDate,@photo,@paymentStatus,@discount,@amount)";
             SqlConnection conn = GetConnection();
             SqlCommand insCmd = new SqlCommand(insStmt, conn);
-            insCmd.Parameters.AddWithValue("@buyer", order.Buyer);
-            insCmd.Parameters.AddWithValue("@good", order.Good);
-            insCmd.Parameters.AddWithValue("@price", order.Price);
-            insCmd.Parameters.AddWithValue("@quantity", order.Quantity);
-            insCmd.Parameters.AddWithValue("@goodColor", order.GoodColor);
-            insCmd.Parameters.AddWithValue("@goodSize", order.GoodSize);
-            if (order.Remark == null)
+            insCmd.Parameters.AddWithValue("@clientID", os.ClientID);
+            insCmd.Parameters.AddWithValue("@goodID", os.GoodID);
+            insCmd.Parameters.AddWithValue("@price", os.Price);
+            insCmd.Parameters.AddWithValue("@quantity", os.Quantity);
+            if (os.Remark == null)
             {
                 insCmd.Parameters.AddWithValue("@remark", DBNull.Value);
             }
             else
             {
-                insCmd.Parameters.AddWithValue("@remark", order.Remark);
+                insCmd.Parameters.AddWithValue("@remark", os.Remark);
             }
-            insCmd.Parameters.AddWithValue("@address", order.Address);
-            insCmd.Parameters.AddWithValue("@orderDate", order.OrderDate);
-            insCmd.Parameters.AddWithValue("@shipDate", order.ShipDate);
-            if (order.Photo == null)
-            {
-                insCmd.Parameters.AddWithValue("@photo", DBNull.Value);
-            }
-            else
-            {
-                insCmd.Parameters.AddWithValue("@photo", order.Photo);
-            }
-            insCmd.Parameters.AddWithValue("@paymentStatus", order.PaymentStatus);
-
-            //string insStmt = "INSERT INTO OrderItem (Buyer, Good) VALUES (@buyer,@good)";
-            //SqlConnection conn = GetConnection();
-            //SqlCommand insCmd = new SqlCommand(insStmt, conn);
-            //insCmd.Parameters.AddWithValue("@buyer", order.Buyer);
-            //insCmd.Parameters.AddWithValue("@good", order.Good);
+            insCmd.Parameters.AddWithValue("@orderDate", os.OrderDate);
+            insCmd.Parameters.AddWithValue("@shipDate", os.ShipDate);
+            insCmd.Parameters.AddWithValue("@paymentStatus", os.PaymentStatus);
+            insCmd.Parameters.AddWithValue("@discount", os.Discount);
+            insCmd.Parameters.AddWithValue("@amount", os.Amount);
 
             try
             {
                 conn.Open();
                 insCmd.ExecuteNonQuery();
             }
-            catch(SqlException ex) { throw ex; }
+            catch (SqlException ex) { throw ex; }
             finally { conn.Close(); }
         }
 
-        public static List<OrderForm> GetOrder()
+        public static List<OrderingSystemForm> GetOrderingSystem()
         {
-            List<OrderForm> orderList = new List<OrderForm>();
+            List<OrderingSystemForm> osList = new List<OrderingSystemForm>();
             SqlConnection conn = GetConnection();
             string selStmt = "SELECT * FROM OrderItem";
             SqlCommand selCmd = new SqlCommand(selStmt, conn);
@@ -80,27 +57,26 @@ namespace OrderingSystem
                 SqlDataReader reader = selCmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    OrderForm order = new OrderForm();
-                    order.Id = (int)reader["Id"];
-                    order.Buyer = reader["Buyer"].ToString();
-                    order.Good = reader["Good"].ToString();
-                    order.Price = (decimal)reader["Price"];
-                    order.Quantity = (int)reader["Quantity"];
-                    order.GoodColor = reader["GoodColor"].ToString();
-                    order.GoodSize = reader["GoodSize"].ToString();
-                    order.Remark = reader["Remark"].ToString();
-                    order.Address = reader["Address"].ToString();
-                    order.OrderDate = (DateTime)reader["OrderDate"];
-                    order.ShipDate = (DateTime)reader["ShipDate"];
-                    order.Photo = reader["Photo"].ToString();
-                    order.PaymentStatus = reader["PaymentStatus"].ToString();
-                    orderList.Add(order);
+                    OrderingSystemForm osForm = new OrderingSystemForm();
+                    osForm.Id = (int)reader["OrderID"];
+                    osForm.ClientID = (int)reader["ClientID"];
+                    osForm.GoodID = (int)reader["GoodID"];
+                    osForm.Price = (decimal?)reader["Price"];
+                    osForm.Quantity = (int)reader["Quantity"];
+                    osForm.Remark = reader["Remark"].ToString();
+                    osForm.OrderDate = (DateTime)reader["OrderDate"];
+                    osForm.ShipDate = (DateTime)reader["ShipDate"];
+                    osForm.PaymentStatus = reader["PaymentStatus"].ToString();
+                    osForm.Discount = (decimal?)reader["Discount"];
+                    osForm.Amount = (decimal?)reader["Amount"];
+
+                    osList.Add(osForm);
                 }
                 reader.Close();
             }
-            catch(SqlException ex) { throw ex; }
+            catch (SqlException ex) { throw ex; }
             finally { conn.Close(); }
-            return orderList;
+            return osList;
         }
     }
 }
